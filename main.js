@@ -18,9 +18,9 @@ test = Boolean(test);
 console.log(test);
 
 const arr = [2, 3, 5, 8];
-let resalt = 0;
+let result = 0;
 for(let i = 0; i < arr.length; ++i){
-    resalt += arr[i];
+    result += arr[i];
 }
 console.log(resalt);
 
