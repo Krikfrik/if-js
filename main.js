@@ -39,8 +39,8 @@ for(let i = 0; i < arr2.length; ++i){
 
 //lesson-3 homework:
 
-function palindrome(String) {
-    return String === String.split('').reverse().join('');
+function palindrome(string) {
+    return string === string.split('').reverse().join('');
 }
 console.log(palindrome('шалаш'));
 console.log(palindrome('слон'));
