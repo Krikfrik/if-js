@@ -352,3 +352,17 @@ const newSearch = (str) => {
 console.log(newSearch('Germany'));
 
 // 3.
+const countries = hotels.reduce((acc, item) => {
+  const result = {...acc};
+  if(!result[item.country]){
+    result[item.country] = [];
+  }
+  if(!result[item.country].includes(item.city)){
+    result[item.country].push(item.city);
+  }
+  return result;
+}, {})
+
+console.log(countries);
+
+
