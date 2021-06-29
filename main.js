@@ -521,33 +521,42 @@ console.log(students.getInfo);
 const colors = {
   data: ['magenta', 'cyan', 'firebrick', 'springgreen', 'skyblue'],
   [Symbol.iterator]() {
-    let current = data[0]
-    let last = data[-1]
-    return {
-      next(){
-        if( current <= last){
-          return {
-            done: false,
-            value: current++
-          }
-        }
-        else{
-          return {
-            done: false,
-            value: current = data[0]
-          }
-        }
+    return this
+  },
+  next() {
+    if (this.current === undefined) {
+      this.current = 0
+    }
+    if (this.current <= data.length) {
+      return {
+        done: false,
+        value: this.data[this.current++] 
+      };
+    }; 
+    if(this.current === data.length){
+      this.current = 0
+      return {
+        done: false,
+        value: this.data[this.current++]
       }
     }
   }
 }
 
-let p = document.querySelectorAll('p');
+const changeColor = (param) => {
+  return (event) => {
+    event.target.style.color = (param).next().value;
+  }
+}
 
-p.forEach((item) => {
-  item.addEventListener('click', item.style.color = colors.next().value);
-});
+const changeParagraphColor = (p) => {
+  let paint = colors[Symbol.iterator]();
+  p.addEventListener('click', changeColor(paint)); 
+}
 
+changeParagraphColor(document.getElementById('text1'));
+changeParagraphColor(document.getElementById('text2'));
+changeParagraphColor(document.getElementById('text3'));
 
 
 
