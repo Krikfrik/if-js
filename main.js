@@ -532,13 +532,10 @@ const colors = {
         done: false,
         value: this.data[this.current++] 
       };
-    }; 
-    if(this.current === data.length){
-      this.current = 0
-      return {
-        done: false,
-        value: this.data[this.current++]
-      }
+    }
+    else {
+      this.current = 0;
+      return this.next();
     }
   }
 }
