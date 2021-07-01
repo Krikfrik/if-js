@@ -547,13 +547,10 @@ const changeColor = (param) => {
 }
 
 const changeParagraphColor = (p) => {
-  let paint = colors[Symbol.iterator]();
-  p.addEventListener('click', changeColor(paint)); 
+  p.addEventListener('click', changeColor({...colors})); 
 }
 
 changeParagraphColor(document.getElementById('text1'));
 changeParagraphColor(document.getElementById('text2'));
 changeParagraphColor(document.getElementById('text3'));
-
-
 
