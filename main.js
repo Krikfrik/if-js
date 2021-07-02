@@ -88,24 +88,24 @@ function sum(a){
 }
 console.log(sum(5)(2));
 
-const colors = ['magenta', 'cyan', 'firebrick', 'springgreen', 'skyblue'];
-const p = document.querySelectorAll('p');
+// const colors = ['magenta', 'cyan', 'firebrick', 'springgreen', 'skyblue'];
+// const p = document.querySelectorAll('p');
 
-const changeColor = () => {
-    let i = 0;
-    return (e) => {
-        e.target.style.color = colors[i];
-        i++;
-        if(i >= colors.length){
-            i = 0;
-        }
-    }
-}
+// const changeColor = () => {
+//     let i = 0;
+//     return (e) => {
+//         e.target.style.color = colors[i];
+//         i++;
+//         if(i >= colors.length){
+//             i = 0;
+//         }
+//     }
+// }
 
-p.forEach((item) => {
-    const paint = changeColor();
-    item.addEventListener('click', paint);
-});
+// p.forEach((item) => {
+//     const paint = changeColor();
+//     item.addEventListener('click', paint);
+// });
 
 // lesson-5 homework
 //1.
@@ -365,7 +365,7 @@ const countries = hotels.reduce((acc, item) => {
 
 console.log(countries);
 
-//lesson-7 homework ЧТО-ТО ВСЕ-РАВНО ПОШЛО НЕ ТАК)
+//lesson-7 homework
 
 const obj1 = {
   a: 'a',
@@ -401,29 +401,156 @@ const obj3 = {
 };
 
 const deepEqual = (object1, object2) => {
-  for(let key in object1&&object2){
-    if(typeof object1[key] !== typeof object2[key]){
-      object2[key]++;
-    }
-    if(typeof object1[key] === typeof object2[key]){
-      if(typeof object1[key] !== 'Object'){
-        if(object1[key] !== object2[key]){
-          return false;
-        }
+  const objs = typeof object1 === 'object' && typeof object2 === 'object';
+  const notNull = object1 !== null && object2 !== null;
+
+  if (objs && notNull) {
+      for (let key in object1) {
+          if(!object2.hasOwnProperty(key)) {
+              return false;
+          }
+          if(typeof object1[key] === 'object' && typeof object2[key] === 'object') {
+              const result = deepEqual(object1[key], object2[key]);
+              if (!result) {
+                  return false;
+              } 
+          } else {
+              if(object1[key] !== object2[key]) {
+                  return false;
+              }
+          }
       }
-      else if(typeof object1[key] === 'Object'){
-        return deepEqual(object1[key], object2[key]);
-      }
-    } 
-    return true;
+      return true;
   }
 };
 
-console.log(deepEqual(obj1, obj2));
-console.log(deepEqual(obj2, obj3));
-console.log(deepEqual(obj1, obj3));
+console.log(deepEqual(obj1, obj2)); 
+console.log(deepEqual(obj1, obj3)); 
+ 
+//lesoon-8 homework
+
+const studentsData = [
+  {
+    firstName: "Василий",
+    lastName: "Петров",
+    admissionYear: 2019,
+    courseName: "Java",
+  },
+  {
+    firstName: "Иван",
+    lastName: "Иванов",
+    admissionYear: 2020,
+    courseName: "JavaScript",
+  },
+  {
+    firstName: "Александр",
+    lastName: "Федоров",
+    admissionYear: 2017,
+    courseName: "Python",
+  },
+  {
+    firstName: "Николай",
+    lastName: "Петров",
+    admissionYear: 2020,
+    courseName: "Android",
+  },
+];
+
+class User {
+  firstName = "";
+  lastName = "";
+  constructor(firstName, lastName) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+  }
+  get fullName() {
+    return this.firstName + " " + this.lastName;
+  }
+}
+
+class Student extends User {
+  admissionYear = 0;
+  courseName = "";
+  constructor(firstName, lastName, admissionYear, courseName) {
+    super(firstName, lastName);
+    this.admissionYear = admissionYear;
+    this.courseName = courseName;
+  }
+  get courseNumber() {
+    let result = "";
+    let course = new Date().getFullYear() - this.admissionYear;
+    if (course < 1) {
+      return (result = "1 курс");
+    }
+    return (result = `${course} курс`);
+  }
+}
+
+class Students {
+  data = new Array();
+
+  constructor(students) {
+    students.forEach((element) => {
+      this.data.push(new Student(element.firstName, element.lastName, element.admissionYear, element.courseName));
+    });
+  }
+
+  sortByCourseNumber(data) {
+    let currentYear = new Date().getFullYear();
+    return data.sort((a, b) => (currentYear - a.admissionYear > currentYear - b.admissionYear ? 1 : -1));
+  }
+
+  get getInfo() {
+    const data = this.sortByCourseNumber(this.data);
+    let result = [];
+
+    data.forEach((el) => {
+      result.push(`${el.fullName} - ${el.courseName}, ${el.courseNumber}`);
+    });
+
+    return result;
+  }
+}
+
+const students = new Students(studentsData);
+console.log(students.getInfo);
+
+// lesson-9 homework
 
 
+const colors = {
+  data: ['magenta', 'cyan', 'firebrick', 'springgreen', 'skyblue'],
+  [Symbol.iterator]() {
+    return this
+  },
+  next() {
+    if (this.current === undefined) {
+      this.current = 0
+    }
+    if (this.current < this.data.length) {
+      return {
+        done: false,
+        value: this.data[this.current++] 
+      };
+    }
+    if(this.current = this.data.length) {
+      this.current = 0;
+      return this.next();
+    }
+  }
+}
 
+const changeColor = (param) => {
+  return (event) => {
+    event.target.style.color = (param).next().value;
+  }
+}
 
+const changeParagraphColor = (p) => {
+  p.addEventListener('click', changeColor({...colors})); 
+}
+
+changeParagraphColor(document.getElementById('text1'));
+changeParagraphColor(document.getElementById('text2'));
+changeParagraphColor(document.getElementById('text3'));
 
