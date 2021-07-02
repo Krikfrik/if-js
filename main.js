@@ -527,13 +527,13 @@ const colors = {
     if (this.current === undefined) {
       this.current = 0
     }
-    if (this.current <= data.length) {
+    if (this.current < this.data.length) {
       return {
         done: false,
         value: this.data[this.current++] 
       };
     }
-    else {
+    if(this.current = this.data.length) {
       this.current = 0;
       return this.next();
     }
