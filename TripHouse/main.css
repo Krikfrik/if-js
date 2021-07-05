@@ -1,0 +1,133 @@
+@font-face {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  src: url("./fonts/roboto-v27-latin-regular.eot");
+  /* IE9 Compat Modes */
+  src: local(""), url("./fonts/roboto-v27-latin-regular.eot?#iefix") format("embedded-opentype"), url("./fonts/roboto-v27-latin-regular.woff2") format("woff2"), url("./fonts/roboto-v27-latin-regular.woff") format("woff"), url("./fonts/roboto-v27-latin-regular.ttf") format("truetype"), url("./fonts/roboto-v27-latin-regular.svg#Roboto") format("svg");
+  /* Legacy iOS */
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto";
+}
+
+h2 {
+  text-align: center;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 47px;
+}
+@media (max-width: 800px) {
+  h2 {
+    font-size: 28px;
+    line-height: 33px;
+  }
+}
+
+a {
+  text-decoration: none;
+  font: inherit;
+}
+
+.Homes {
+    max-width: 1440px;
+    height: 828px;
+    margin: 0 auto;
+    background: #EAF0F9;
+    display: flex;
+    flex-direction: column;
+  }
+  @media (max-width: 800px) {
+    .Homes {
+      height: 354px;
+    }
+  }
+  .Homes_title {
+    margin: 120px 0 105px;
+  }
+  @media (max-width: 800px) {
+    .Homes_title {
+      margin: 40px 0 32px;
+    }
+  }
+  .Arrow_prev {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    transform: scale(-1, 1);
+  }
+  @media (max-width: 800px){
+    .Arrow_prev{
+      width: 28px;
+      height: 28px;
+    }
+  }
+  .Homes_carousel {
+    width: 85%;
+    margin: 0 auto;
+    margin-bottom: 121px;
+    display: block;
+    display: flex;
+    position: relative;
+  }
+  @media (max-width: 800px) {
+    .Homes_carousel{
+      width: 95%;
+    }
+  }
+  .Arrow_next {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+  }
+  @media (max-width: 800px) {
+    .Arrow_next {
+      width: 28px;
+      height: 28px;
+    }
+  }
+  .Homes_gallery{
+    width: 90%;
+    overflow: hidden;
+  }
+  .Homes_items{
+    width: fit-content;
+    list-style: none;
+    transition: margin-left 250ms;
+    display: flex;
+  }
+  .Homes_item {
+    display: flex;
+    flex-direction: column;
+    display: inline-block;
+  }
+  .Homes_name {
+    margin: 24px 0;
+    text-decoration: none;
+    font-family: "Roboto";
+    font-size: 24px;
+    line-height: 28px;
+    color: #3077C6;
+  }
+  @media (max-width: 800px) {
+    .Homes_name {
+      font-size: 12px;
+      line-height: 14px;
+    }
+  }
+  .Homes_adress {
+    font-size: 24px;
+    line-height: 28px;
+    color: #BFBFBF;
+  }
+  @media (max-width: 800px) {
+    .Homes_adress {
+      font-size: 12px;
+      line-height: 14px;
+    }
+  }
