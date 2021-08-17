@@ -39,4 +39,3 @@ const main = async () => {
   homesList.append(...getListContent());
 }
 
-
