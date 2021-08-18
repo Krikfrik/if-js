@@ -1,5 +1,4 @@
-const main = async () => {
-  debugger
+(async function main () {
   const homesData = await fetch( 'https://fe-student-api.herokuapp.com/api/hotels/popular')
   .then((res) => {
     if(!res.ok){
@@ -9,6 +8,7 @@ const main = async () => {
   })
   .then((data) => data)
   .catch((err) => {console.log(err.message)});
+  
   function getListContent() {
     let result = [];
     
@@ -37,5 +37,5 @@ const main = async () => {
   const homesList = document.querySelector(".Homes_list")
 
   homesList.append(...getListContent());
-}
+}());
 
