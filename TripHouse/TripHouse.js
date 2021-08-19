@@ -8,7 +8,7 @@
   })
   .then((data) => data)
   .catch((err) => {console.log(err.message)});
-  
+
   function getListContent() {
     let result = [];
     
@@ -25,8 +25,10 @@
         homesName.className = 'Homes_name';
         const homesNameText = document.createTextNode(`${item.name}`);
         homesName.appendChild(homesNameText);
-        const homesAdress = document.createTextNode(`${item.city}, ${item.country}`);
+        const homesAdress = document.createElement("a");
         homesAdress.className = 'Homes_adress';
+        const homesAdressText = document.createTextNode(`${item.city}, ${item.country}`);
+        homesAdress.appendChild(homesAdressText);
         homesItem.append(homesPictureLink, homesName, homesAdress);
         result.push(homesItem);
       }
